@@ -4,13 +4,15 @@ Emulate the tactile experience of a vinyl collection through your Sonos system, 
 
 There is a step-by-step tutorial on how to set this up from first principles on a Raspberry Pi here: https://www.instructables.com/id/Sonos-Spotify-Vinyl-Emulator-SSVE/
 
-<b>Description</b>
+Description
+---------------------------
 
 Start playing a Spotify album or playlist through Sonos when you place a physical object on an NFC reader connected to a Raspberry Pi.
 
 You can attach these tiny NFC tags to any physical object you want: I like polaroid-style prints of album covers and tape cassettes for playlists/mixtapes, but you do you; send me a photo if you're baller enough to print album art on 12-inch square aluminium plates and tag it to that.
 
-<b>Setup</b>
+Setup
+---------------------------
 
 Originally forked from <a href="https://github.com/pucbaldwin/musicbox">musicbox project</a> which was itself a fork from <a href="https://github.com/shawnrk/songblocks">songblocks project</a>. I have rewritten and simplified this a lot, however, so this version looks very different to those two.
 
