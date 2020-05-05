@@ -52,7 +52,4 @@ print("")
 
 while True:
     reader.connect(rdwr={'on-connect': touched})
-#    print("Tag released")
-#    print ("---")
-#    print ("")
     sleep(0.1);
