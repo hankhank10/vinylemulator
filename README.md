@@ -12,7 +12,7 @@ You can attach these tiny NFC tags to any physical object you want: I like polar
 
 <b>Usage</b>
 
-Originally fork from musicbox project https://github.com/pucbaldwin/musicbox which was itself a fork from songblocks project https://github.com/shawnrk/songblocks. I have rewritten and simplified this a lot, however, so this version looks very different to those two.
+Originally forked from musicbox project https://github.com/pucbaldwin/musicbox which was itself a fork from songblocks project https://github.com/shawnrk/songblocks. I have rewritten and simplified this a lot, however, so this version looks very different to those two.
 
 All the actual back end work of this is done by the node-sonos-http-api https://github.com/jishi/node-sonos-http-api/ which will need to be installed and setup in order to work.
 
