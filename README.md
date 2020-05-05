@@ -28,7 +28,7 @@ It's all coded in Python. Kind of.
 
 <b>Usage</b>
 
-This currently accesses three any of three different services depending on the content of the NFC tag. The relevant service is determined by the start of the text passed by the NFC tag.
+This currently accesses three any of three different services depending on the content of the NFC tag presented. The relevant service is determined by the start of the text passed by the NFC tag.
 
 1) <i>spotify</i>: plays a spotify album, track or playlist URI). Examples of what can be passed:
       <p><code>spotify:track:4LI1ykYGFCcXPWkrpcU7hn</code>
