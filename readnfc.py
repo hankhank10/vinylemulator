@@ -13,21 +13,29 @@ def touched(tag):
             print("Read from NFC tag: "+ receivedtext)
 
             if receivedtext.startswith ('spotify'):
-                print ("Spotify URI detected")
+                servicetype = "spotify"
                 sonosinstruction = "spotify/now/" + record.text
 
             if receivedtext.startswith ('tunein'):
-                print ("Tunein URI detected")
+                servicetype = "tunein"
                 sonosinstruction = record.text
 
+            if receivedtext.startswith ('command'):
+                servicetype = "command"
+                sonosinstruction = record.text[8:]
+
+            print ("Detected " + servicetype + " service request")
+
+            #build the URL we want to request
             urltoget = sonossettings.sonoshttpaddress + "/" + sonossettings.sonosroom + "/" + sonosinstruction
-            print ("Fetching via HTTP: "+ urltoget)
 
+            #clear the queue for every service request type except commands
+            if servicetype <> "command":
+                print ("Clearing Sonos queue")
+                r = requests.get(sonossettings.sonoshttpaddress + "/" + sonossettings.sonosroom + "/clearqueue")
 
-            #clear the queue (you can delete this next line if you prefer not to have a clear queue)
-            r = requests.get(sonossettings.sonoshttpaddress + "/" + sonossettings.sonosroom + "/clearqueue")
-
-            #request the URL built previously
+            #use the request function to get the URL built previously, triggering the sonos
+            print ("Fetching URL via HTTP: "+ urltoget)
             r = requests.get(urltoget)
             print ("")
 
