@@ -10,7 +10,7 @@ Start playing a Spotify album or playlist through Sonos when you place a physica
 
 You can attach these tiny NFC tags to any physical object you want: I like polaroid-style prints of album covers and tape cassettes for playlists/mixtapes, but you do you; send me a photo if you're baller enough to print album art on 12-inch square aluminium plates and tag it to that.
 
-<b>Usage</b>
+<b>Setup</b>
 
 Originally forked from musicbox project https://github.com/pucbaldwin/musicbox which was itself a fork from songblocks project https://github.com/shawnrk/songblocks. I have rewritten and simplified this a lot, however, so this version looks very different to those two.
 
@@ -25,6 +25,26 @@ Second, these NFC tags aren't tied to the particular Raspberry Pi. This means th
 It also means that other applications can read the tags - I am working on an implementation for Android phones which don't rely on Pi for the NFC, for instance.
 
 It's all coded in Python. Kind of.
+
+<b>Usage</b>
+
+This currently allows three different services through NFC tags presented. The service is determined by the start of the text passed by the NFC tag.
+
+1) <i>spotify</i>: plays a spotify album, track or playlist URI). Examples of what can be passed:
+    spotify:track:4LI1ykYGFCcXPWkrpcU7hn
+    spotify:album:4hW2wvP51Myt7UIVTgSp4f
+    spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im
+
+2) <i>tunein</i>: plays a radio station identified by a tunein ID number. Example of what can be passed:
+    tunein/play/44491
+
+3) <i>command</i>: executes a command in the room. Can accept any commands as defined in node-sonos-http-api. Examples of what can be passed:
+    command:playpause
+    command:mute
+    command:next
+    command:volume/50
+    command:volume/+10
+    command:shuffle/on
 
 <b>Setup instructions</b>
 
