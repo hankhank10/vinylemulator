@@ -40,18 +40,21 @@ This currently accesses three any of three different services depending on the c
 | command | Executes a command in the current room; can accept any command as defined in node-sonos-http-api |
 
 Examples of what can be passed:
-      <p><code>spotify:track:4LI1ykYGFCcXPWkrpcU7hn</code>
-      <p><code>spotify:album:4hW2wvP51Myt7UIVTgSp4f</code>
-      <p><code>spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im</code>
 
-      <p><code>tunein/play/44491</code>
+  <code>
+      spotify:track:4LI1ykYGFCcXPWkrpcU7hn
+      spotify:album:4hW2wvP51Myt7UIVTgSp4f
+      spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im
 
-      <p><code>command:playpause</code>
-      <p><code>command:mute</code>
-      <p><code>command:next</code>
-      <p><code>command:volume/50</code>
-      <p><code>command:volume/+10</code>
-      <p><code>command:shuffle/on</code>
+      tunein/play/44491
+
+      command:playpause
+      command:mute
+      command:next
+      command:volume/50
+      command:volume/+10
+      command:shuffle/on
+    </code>
 
 Setup instructions
 ---------------------------
