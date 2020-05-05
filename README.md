@@ -32,21 +32,25 @@ This currently allows three different services through NFC tags presented. The s
 
 1) <i>spotify</i>: plays a spotify album, track or playlist URI). Examples of what can be passed:<br>
     <code>
-    spotify:track:4LI1ykYGFCcXPWkrpcU7hn
-    spotify:album:4hW2wvP51Myt7UIVTgSp4f
-    spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im
+      spotify:track:4LI1ykYGFCcXPWkrpcU7hn
+      spotify:album:4hW2wvP51Myt7UIVTgSp4f
+      spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im
     </code>
 
 2) <i>tunein</i>: plays a radio station identified by a tunein ID number. Example of what can be passed:
-    <code>tunein/play/44491</code>
+    <code>
+      tunein/play/44491
+    </code>
 
 3) <i>command</i>: executes a command in the room. Can accept any commands as defined in node-sonos-http-api. Examples of what can be passed:
-    <code>command:playpause
-    command:mute
-    command:next
-    command:volume/50
-    command:volume/+10
-    command:shuffle/on</code>
+    <code>
+      command:playpause
+      command:mute
+      command:next
+      command:volume/50
+      command:volume/+10
+      command:shuffle/on
+    </code>
 
 <b>Setup instructions</b>
 
