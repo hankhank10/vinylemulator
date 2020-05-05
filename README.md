@@ -30,10 +30,12 @@ It's all coded in Python. Kind of.
 
 This currently allows three different services through NFC tags presented. The service is determined by the start of the text passed by the NFC tag.
 
-1) <i>spotify</i>: plays a spotify album, track or playlist URI). Examples of what can be passed:
-    <code>spotify:track:4LI1ykYGFCcXPWkrpcU7hn
+1) <i>spotify</i>: plays a spotify album, track or playlist URI). Examples of what can be passed:<br>
+    <code>
+    spotify:track:4LI1ykYGFCcXPWkrpcU7hn
     spotify:album:4hW2wvP51Myt7UIVTgSp4f
-    spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im</code>
+    spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im
+    </code>
 
 2) <i>tunein</i>: plays a radio station identified by a tunein ID number. Example of what can be passed:
     <code>tunein/play/44491</code>
