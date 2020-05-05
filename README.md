@@ -40,7 +40,8 @@ This currently accesses three any of three different services depending on the c
 | command | Executes a command in the current room; can accept any command as defined in node-sonos-http-api |
 
 Examples of what can be passed:
-  <code>
+
+```sh
 
       spotify:track:4LI1ykYGFCcXPWkrpcU7hn
       spotify:album:4hW2wvP51Myt7UIVTgSp4f
@@ -54,7 +55,7 @@ Examples of what can be passed:
       command:volume/50
       command:volume/+10
       command:shuffle/on
-    </code>
+```
 
 Setup instructions
 ---------------------------
