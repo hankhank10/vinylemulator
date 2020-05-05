@@ -28,19 +28,24 @@ It also means that other applications can read the tags - I am working on an imp
 
 It's all coded in Python. Kind of.
 
-<b>Usage</b>
+Usage
+---------------------------
 
 This currently accesses three any of three different services depending on the content of the NFC tag presented. The relevant service is determined by the start of the text passed by the NFC tag.
 
-1) <i>spotify</i>: plays a spotify album, track or playlist URI). Examples of what can be passed:
+| Service name     | Behaviour       |
+| ---------------- | --------------- |
+| spotify | Plays a spotify album, track or playlist URI |
+| tunein | Plays a radio station identified by a tunein ID number |
+| command | Executes a command in the current room; can accept any command as defined in node-sonos-http-api |
+
+Examples of what can be passed:
       <p><code>spotify:track:4LI1ykYGFCcXPWkrpcU7hn</code>
       <p><code>spotify:album:4hW2wvP51Myt7UIVTgSp4f</code>
       <p><code>spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im</code>
 
-2) <i>tunein</i>: plays a radio station identified by a tunein ID number. Example of what can be passed:
       <p><code>tunein/play/44491</code>
 
-3) <i>command</i>: executes a command in the room. Can accept any commands as defined in node-sonos-http-api. Examples of what can be passed:
       <p><code>command:playpause</code>
       <p><code>command:mute</code>
       <p><code>command:next</code>
@@ -48,7 +53,8 @@ This currently accesses three any of three different services depending on the c
       <p><code>command:volume/+10</code>
       <p><code>command:shuffle/on</code>
 
-<b>Setup instructions</b>
+Setup instructions
+---------------------------
 
 I made a full tutorial, starting from absolute first principles, here:
 https://www.instructables.com/id/Sonos-Spotify-Vinyl-Emulator-SSVE/
