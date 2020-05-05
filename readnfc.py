@@ -8,19 +8,27 @@ def touched(tag):
 
     if tag.ndef:
         for record in tag.ndef.records:
-            print("Read from NFC tag: "+ record.text)
+            receivedtext = record.text
 
-            #put together the URL to send to node-http-sonos-api
-            sonosinstruction=record.text
-            urltoget = sonossettings.sonoshttpaddress + "/" + sonossettings.sonosroom + "/spotify/now/" + sonosinstruction
+            print("Read from NFC tag: "+ receivedtext)
+
+            if receivedtext.startswith ('spotify'):
+                print ("Spotify URI detected")
+                sonosinstruction = "spotify/now/" + record.text
+
+            if receivedtext.startswith ('tunein'):
+                print ("Tunein URI detected")
+                sonosinstruction = record.text
+
+            urltoget = sonossettings.sonoshttpaddress + "/" + sonossettings.sonosroom + "/" + sonosinstruction
             print ("Fetching via HTTP: "+ urltoget)
+
 
             #clear the queue (you can delete this next line if you prefer not to have a clear queue)
             r = requests.get(sonossettings.sonoshttpaddress + "/" + sonossettings.sonosroom + "/clearqueue")
 
-            #send it using requests
+            #request the URL built previously
             r = requests.get(urltoget)
-
             print ("")
 
     else:
