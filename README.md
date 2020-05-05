@@ -42,6 +42,7 @@ This currently accesses three any of three different services depending on the c
 Examples of what can be passed:
 
   <code>
+  
       spotify:track:4LI1ykYGFCcXPWkrpcU7hn
       spotify:album:4hW2wvP51Myt7UIVTgSp4f
       spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im
