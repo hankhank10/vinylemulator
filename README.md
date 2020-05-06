@@ -4,13 +4,15 @@ Emulate the tactile experience of a vinyl collection through your Sonos system, 
 
 There is a step-by-step tutorial on how to set this up from first principles on a Raspberry Pi here: https://www.instructables.com/id/Sonos-Spotify-Vinyl-Emulator-SSVE/
 
-<b>Description</b>
+Description
+---------------------------
 
 Start playing a Spotify album or playlist through Sonos when you place a physical object on an NFC reader connected to a Raspberry Pi.
 
 You can attach these tiny NFC tags to any physical object you want: I like polaroid-style prints of album covers and tape cassettes for playlists/mixtapes, but you do you; send me a photo if you're baller enough to print album art on 12-inch square aluminium plates and tag it to that.
 
-<b>Setup</b>
+Setup
+---------------------------
 
 Originally forked from <a href="https://github.com/pucbaldwin/musicbox">musicbox project</a> which was itself a fork from <a href="https://github.com/shawnrk/songblocks">songblocks project</a>. I have rewritten and simplified this a lot, however, so this version looks very different to those two.
 
@@ -26,27 +28,37 @@ It also means that other applications can read the tags - I am working on an imp
 
 It's all coded in Python. Kind of.
 
-<b>Usage</b>
+Usage
+---------------------------
 
 This currently accesses three any of three different services depending on the content of the NFC tag presented. The relevant service is determined by the start of the text passed by the NFC tag.
 
-1) <i>spotify</i>: plays a spotify album, track or playlist URI). Examples of what can be passed:
-      <p><code>spotify:track:4LI1ykYGFCcXPWkrpcU7hn</code>
-      <p><code>spotify:album:4hW2wvP51Myt7UIVTgSp4f</code>
-      <p><code>spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im</code>
+| Service name     | Behaviour       |
+| ---------------- | --------------- |
+| spotify | Plays a spotify album, track or playlist URI |
+| tunein | Plays a radio station identified by a tunein ID number |
+| command | Executes a command in the current room; can accept any command as defined in node-sonos-http-api |
 
-2) <i>tunein</i>: plays a radio station identified by a tunein ID number. Example of what can be passed:
-      <p><code>tunein/play/44491</code>
+Examples of what can be passed:
 
-3) <i>command</i>: executes a command in the room. Can accept any commands as defined in node-sonos-http-api. Examples of what can be passed:
-      <p><code>command:playpause</code>
-      <p><code>command:mute</code>
-      <p><code>command:next</code>
-      <p><code>command:volume/50</code>
-      <p><code>command:volume/+10</code>
-      <p><code>command:shuffle/on</code>
+```sh
 
-<b>Setup instructions</b>
+      spotify:track:4LI1ykYGFCcXPWkrpcU7hn
+      spotify:album:4hW2wvP51Myt7UIVTgSp4f
+      spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im
+
+      tunein/play/44491
+
+      command:playpause
+      command:mute
+      command:next
+      command:volume/50
+      command:volume/+10
+      command:shuffle/on
+```
+
+Setup instructions
+---------------------------
 
 I made a full tutorial, starting from absolute first principles, here:
 https://www.instructables.com/id/Sonos-Spotify-Vinyl-Emulator-SSVE/
