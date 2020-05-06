@@ -2,7 +2,7 @@
 
 Emulate the tactile experience of a vinyl collection through your Sonos system, but with a back end run by Spotify.
 
-There is a step-by-step tutorial on how to set this up from first principles on a Raspberry Pi here: https://www.hackster.io/mark-hankinson/sonos-spotify-vinyl-emulator-ssve-3be63d
+There is a step-by-step tutorial on how to set this up from first principles on a Raspberry Pi here: https://www.hackster.io/mark-hank/sonos-spotify-vinyl-emulator-ssve-3be63d
 
 Description
 ---------------------------
