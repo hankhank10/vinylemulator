@@ -1,8 +1,9 @@
 import time
 import nfc
 import requests
-import sonossettings #this is a settings file stored in the directory
 import uuid
+import appsettings #you shouldnt need to edit this file
+import usersettings #this is the file you might need to edit
 
 # this function gets called when a NFC tag is detected
 def touched(tag):
@@ -28,12 +29,12 @@ def touched(tag):
             print ("Detected " + servicetype + " service request")
 
             #build the URL we want to request
-            urltoget = sonossettings.sonoshttpaddress + "/" + sonossettings.sonosroom + "/" + sonosinstruction
+            urltoget =usersettings.sonoshttpaddress + "/" + usersettings.sonosroom + "/" + sonosinstruction
 
             #clear the queue for every service request type except commands
             if servicetype <> "command":
                 print ("Clearing Sonos queue")
-                r = requests.get(sonossettings.sonoshttpaddress + "/" + sonossettings.sonosroom + "/clearqueue")
+                r = requests.get(usersettings.sonoshttpaddress + "/" + usersettings.sonosroom + "/clearqueue")
 
             #use the request function to get the URL built previously, triggering the sonos
             print ("Fetching URL via HTTP: "+ urltoget)
@@ -41,21 +42,22 @@ def touched(tag):
             print ("")
 
             #put together log data and send (if given permission)
-            if sonossettings.sendanonymoususagestatistics == "yes":
+            if usersettings.sendanonymoususagestatistics == "yes":
                 logdata = {
                 'timestamp': time.time(),
+                'appversion': appsettings.appversion,
                 'uuid': hex(uuid.getnode()),
                 'event': 'nfcread',
                 'nfcpayload': receivedtext,
                 'servicetype': servicetype,
                 'urlfetched': urltoget
                 }
-                r = requests.post("https://en23qqgaymyen.x.pipedream.net/", data = logdata)
+                r = requests.post(appsettings.usagestatsurl, data = logdata)
 
     else:
         print ("Tag Misread - Sorry")
-        if sonossettings.sendanonymoususagestatistics == "yes":
-            r = requests.post("https://en23qqgaymyen.x.pipedream.net/", data = {'timestamp': time.time(), 'uuid': hex(uuid.getnode()), 'event': 'nfcreaderror'})
+        if usersettings.sendanonymoususagestatistics == "yes":
+            r = requests.post(appsettings.usagestatsurl, data = {'timestamp': time.time(), 'appversion': appsettings.appversion, 'uuid': hex(uuid.getnode()), 'event': 'nfcreaderror'})
 
     return True
 
@@ -65,8 +67,8 @@ print(reader)
 print("Ready!")
 print("")
 
-if sonossettings.sendanonymoususagestatistics == "yes":
-    r = requests.post("https://en23qqgaymyen.x.pipedream.net/", data = {'timestamp': time.time(), 'uuid': hex(uuid.getnode()), 'event': 'appstart'})
+if usersettings.sendanonymoususagestatistics == "yes":
+    r = requests.post(appsettings.usagestatsurl, data = {'timestamp': time.time(), 'appversion': appsettings.appversion, 'uuid': hex(uuid.getnode()), 'event': 'appstart'})
 
 while True:
     reader.connect(rdwr={'on-connect': touched})
