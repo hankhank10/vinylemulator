@@ -1,7 +1,8 @@
-from time import sleep
+import time
 import nfc
 import requests
 import sonossettings #this is a settings file stored in the directory
+import uuid
 
 # this function gets called when a NFC tag is detected
 def touched(tag):
@@ -39,8 +40,22 @@ def touched(tag):
             r = requests.get(urltoget)
             print ("")
 
+            #put together log data and send (if given permission)
+            if sonossettings.sendanonymoususagestatistics == "yes":
+                logdata = {
+                'timestamp': time.time(),
+                'uuid': hex(uuid.getnode()),
+                'event': 'nfcread',
+                'nfcpayload': receivedtext,
+                'servicetype': servicetype,
+                'urlfetched': urltoget
+                }
+                r = requests.post("https://en23qqgaymyen.x.pipedream.net/", data = logdata)
+
     else:
         print ("Tag Misread - Sorry")
+        if sonossettings.sendanonymoususagestatistics == "yes":
+            r = requests.post("https://en23qqgaymyen.x.pipedream.net/", data = {'timestamp': time.time(), 'uuid': hex(uuid.getnode()), 'event': 'nfcreaderror'})
 
     return True
 
@@ -50,6 +65,9 @@ print(reader)
 print("Ready!")
 print("")
 
+if sonossettings.sendanonymoususagestatistics == "yes":
+    r = requests.post("https://en23qqgaymyen.x.pipedream.net/", data = {'timestamp': time.time(), 'uuid': hex(uuid.getnode()), 'event': 'appstart'})
+
 while True:
     reader.connect(rdwr={'on-connect': touched})
-    sleep(0.1);
+    time.sleep(0.1);

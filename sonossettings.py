@@ -6,3 +6,6 @@ sonoshttpaddress="http://localhost:5005"
 
 #set the name of the Sonos room you want to play the music in
 sonosroom="Dining Room"
+
+#send anonymous usage statistics
+sendanonymoususagestatistics="yes"
