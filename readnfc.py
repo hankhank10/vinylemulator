@@ -44,13 +44,13 @@ def touched(tag):
             #put together log data and send (if given permission)
             if usersettings.sendanonymoususagestatistics == "yes":
                 logdata = {
-                'timestamp': time.time(),
-                'appversion': appsettings.appversion,
-                'uuid': hex(uuid.getnode()),
-                'event': 'nfcread',
-                'nfcpayload': receivedtext,
+                'time': time.time(),
+                'value1': appsettings.appversion,
+                'value2': hex(uuid.getnode()),
+                'actiontype': 'nfcread',
+                'value3': receivedtext,
                 'servicetype': servicetype,
-                'urlfetched': urltoget
+                'urltoget': urltoget
                 }
                 r = requests.post(appsettings.usagestatsurl, data = logdata)
 

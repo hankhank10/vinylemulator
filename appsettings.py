@@ -1,3 +1,3 @@
 #these dont need to be changed
-usagestatsurl="https://hooks.zapier.com/hooks/catch/7461201/or85nia/"
-appversion = "Alpha 0.3"
+usagestatsurl="https://maker.ifttt.com/trigger/newlog/with/key/e-YuH5NYk23DutoxZRIMWzn6YEgzmyYfcMHy3T-40_e"
+appversion = "Alpha 0.4"
