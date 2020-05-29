@@ -57,7 +57,7 @@ def touched(tag):
     else:
         print ("Tag Misread - Sorry")
         if usersettings.sendanonymoususagestatistics == "yes":
-            r = requests.post(appsettings.usagestatsurl, data = {'timestamp': time.time(), 'appversion': appsettings.appversion, 'uuid': hex(uuid.getnode()), 'event': 'nfcreaderror'})
+            r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'nfcreaderror'})
 
     return True
 
@@ -68,7 +68,7 @@ print("Ready!")
 print("")
 
 if usersettings.sendanonymoususagestatistics == "yes":
-    r = requests.post(appsettings.usagestatsurl, data = {'timestamp': time.time(), 'appversion': appsettings.appversion, 'uuid': hex(uuid.getnode()), 'event': 'appstart'})
+    r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'appstart'})
 
 while True:
     reader.connect(rdwr={'on-connect': touched})
