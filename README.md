@@ -63,7 +63,7 @@ Setup instructions
 ---------------------------
 
 I made a full tutorial, starting from absolute first principles, here:
-https://www.instructables.com/id/Sonos-Spotify-Vinyl-Emulator-SSVE/
+https://www.hackster.io/mark-hank/sonos-spotify-vinyl-emulator-ssve-3be63d
 
 
 Anonymous stats
