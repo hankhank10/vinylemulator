@@ -14,6 +14,8 @@ def touched(tag):
 
             print("Read from NFC tag: "+ receivedtext)
 
+            servicetype = ""
+
             if receivedtext.startswith ('spotify'):
                 servicetype = "spotify"
                 sonosinstruction = "spotify/now/" + record.text
@@ -26,10 +28,17 @@ def touched(tag):
                 servicetype = "command"
                 sonosinstruction = record.text[8:]
 
-            print ("Detected " + servicetype + " service request")
+            if servicetype == "":
+                print ("Service type not recognised. Tag text should begin spotify, tunein or command. (Case matters: lower case please)")
+                if usersettings.sendanonymoususagestatistics == "yes":
+                    r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'invalid service type sent'})
+                return True
+
+            else:
+                print ("Detected " + servicetype + " service request")
 
             #build the URL we want to request
-            urltoget =usersettings.sonoshttpaddress + "/" + usersettings.sonosroom + "/" + sonosinstruction
+            urltoget = usersettings.sonoshttpaddress + "/" + usersettings.sonosroom + "/" + sonosinstruction
 
             #clear the queue for every service request type except commands
             if servicetype <> "command":
