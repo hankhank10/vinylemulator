@@ -33,9 +33,8 @@ def touched(tag):
                 if usersettings.sendanonymoususagestatistics == "yes":
                     r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'invalid service type sent'})
                 return True
-
-            else:
-                print ("Detected " + servicetype + " service request")
+            
+            print ("Detected " + servicetype + " service request")
 
             #build the URL we want to request
             urltoget = usersettings.sonoshttpaddress + "/" + usersettings.sonosroom + "/" + sonosinstruction
