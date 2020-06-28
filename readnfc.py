@@ -83,5 +83,5 @@ if usersettings.sendanonymoususagestatistics == "yes":
     r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'appstart'})
 
 while True:
-    reader.connect(rdwr={'on-connect': touched})
+    reader.connect(rdwr={'on-connect': touched, 'beep-on-connect': False})
     time.sleep(0.1);
