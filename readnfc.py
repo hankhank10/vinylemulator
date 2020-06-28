@@ -18,22 +18,26 @@ def touched(tag):
 
             if receivedtext.startswith ('spotify'):
                 servicetype = "spotify"
-                sonosinstruction = "spotify/now/" + record.text
+                sonosinstruction = "spotify/now/" + receivedtext
 
             if receivedtext.startswith ('tunein'):
                 servicetype = "tunein"
-                sonosinstruction = record.text
+                sonosinstruction = receivedtext
 
-            if receivedtext.startswith ('apple'):
-                servicetype = "apple"
-                sonosinstruction = "applemusic/now/" + lstrip(record.text, "apple:")
+            if receivedtext.startswith ('apple:'):
+                servicetype = "applemusic"
+                sonosinstruction = "applemusic/now/" + receivedtext.lstrip("apple:")
+
+            if receivedtext.startswith ('applemusic:'):
+                servicetype = "applemusic"
+                sonosinstruction = "applemusic/now/" + receivedtext.lstrip("applemusic:")
 
             if receivedtext.startswith ('command'):
                 servicetype = "command"
-                sonosinstruction = record.text[8:]
+                sonosinstruction = receivedtext[8:]
 
             if servicetype == "":
-                print ("Service type not recognised. Tag text should begin spotify, tunein, command or apple (experimental). (Case matters: lower case please)")
+                print ("Service type not recognised. Tag text should begin spotify, tunein, command or apple/applemusic (experimental). (Case matters: lower case please)")
                 if usersettings.sendanonymoususagestatistics == "yes":
                     r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'invalid service type sent'})
                 return True
