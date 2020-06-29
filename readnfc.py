@@ -26,11 +26,11 @@ def touched(tag):
 
             if receivedtext.startswith ('apple:'):
                 servicetype = "applemusic"
-                sonosinstruction = "applemusic/now/" + receivedtext.lstrip("apple:")
+                sonosinstruction = "applemusic/now/" + receivedtext[6:]
 
             if receivedtext.startswith ('applemusic:'):
                 servicetype = "applemusic"
-                sonosinstruction = "applemusic/now/" + receivedtext.lstrip("applemusic:")
+                sonosinstruction = "applemusic/now/" + receivedtext[11:]
 
             if receivedtext.startswith ('command'):
                 servicetype = "command"
