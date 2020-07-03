@@ -4,11 +4,60 @@ import requests
 import uuid
 import appsettings #you shouldnt need to edit this file
 import usersettings #this is the file you might need to edit
+import ndef
+
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+
+import difflib
+
+def find_uri_from_spotify(album, artist):
+   print "Looking up album '%s' artist '%s'" % (album, artist)
+   sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(usersettings.spotipy_client_id, usersettings.spotipy_client_secret))
+   results = sp.search("album:%s artist:%s" % (album, artist), type="album")
+   albums = results['albums']['items']
+   items = {a['name']:a['uri'] for a in albums}
+   elem = difflib.get_close_matches(album, items.keys(), 1)[0]
+   uri = items[elem]
+   return uri
+
+def find_current_album():
+   url = "/".join((usersettings.sonoshttpaddress, usersettings.sonosroom, "state"))
+   response = requests.get(url)
+   items = response.json()
+   return items['currentTrack']['album'], items['currentTrack']['artist']
+
+def write_current_album(tag):
+   res = find_current_album()
+   if not res:
+      print "No album found"
+      return False
+
+   album, artist = res
+   print "Current Album '%s' Artist '%s'" % (album, artist)
+   uri = find_uri_from_spotify(album, artist)
+
+   print "URI is %s" % uri
+
+   print "Formatting tag"
+   tag.format()
+
+   print "Tag Formatted %s" % tag
+   record = ndef.TextRecord(uri)
+   tag.ndef.records = [record]
+ 
+   print "Finished writing NDEF"  
+
+   say_command = "Finished creating tag for artist %s and album %s" % (artist, album)
+   url = "/".join((usersettings.sonoshttpaddress,usersettings.sonosroom, "say",say_command))
+   requests.get(url)
+   return True 
 
 # this function gets called when a NFC tag is detected
 def touched(tag):
-
-    if tag.ndef:
+    read_mode = tag.ndef and tag.ndef.records
+    if read_mode:
+        print "Received %d records"  % len(tag.ndef.records)
         for record in tag.ndef.records:
             receivedtext = record.text
 
@@ -71,9 +120,8 @@ def touched(tag):
                 r = requests.post(appsettings.usagestatsurl, data = logdata)
 
     else:
-        print ("Tag Misread - Sorry")
-        if usersettings.sendanonymoususagestatistics == "yes":
-            r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'nfcreaderror'})
+        print ("Tag Blank - trying to format/write")
+        write_current_album(tag) 
 
     return True
 
@@ -87,5 +135,9 @@ if usersettings.sendanonymoususagestatistics == "yes":
     r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'appstart'})
 
 while True:
-    reader.connect(rdwr={'on-connect': touched, 'beep-on-connect': False})
+    response = reader.connect(rdwr={'on-connect': touched, 'beep-on-connect': False})
+    if response:
+        r = requests.get(usersettings.sonoshttpaddress + "/" + usersettings.sonosroom + "/playpause")
+    else:
+	break 
     time.sleep(0.1);
