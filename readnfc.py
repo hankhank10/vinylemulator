@@ -54,7 +54,7 @@ def touched(tag):
             urltoget = usersettings.sonoshttpaddress + "/" + sonosroom_local + "/" + sonosinstruction
 
             #clear the queue for every service request type except commands
-            if servicetype <> "command":
+            if servicetype != "command":
                 print ("Clearing Sonos queue")
                 r = requests.get(usersettings.sonoshttpaddress + "/" + sonosroom_local + "/clearqueue")
 
