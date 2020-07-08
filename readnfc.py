@@ -12,39 +12,40 @@ def touched(tag):
     if tag.ndef:
         for record in tag.ndef.records:
             receivedtext = record.text
+            receivedtext_lower = receivedtext.lower()
 
             print("Read from NFC tag: "+ receivedtext)
 
             servicetype = ""
 
-            if receivedtext.startswith ('spotify'):
+            if receivedtext_lower.startswith ('spotify'):
                 servicetype = "spotify"
                 sonosinstruction = "spotify/now/" + receivedtext
 
-            if receivedtext.startswith ('tunein'):
+            if receivedtext_lower.startswith ('tunein'):
                 servicetype = "tunein"
                 sonosinstruction = receivedtext
 
-            if receivedtext.startswith ('apple:'):
+            if receivedtext_lower.startswith ('apple:'):
                 servicetype = "applemusic"
                 sonosinstruction = "applemusic/now/" + receivedtext[6:]
 
-            if receivedtext.startswith ('applemusic:'):
+            if receivedtext_lower.startswith ('applemusic:'):
                 servicetype = "applemusic"
                 sonosinstruction = "applemusic/now/" + receivedtext[11:]
 
-            if receivedtext.startswith ('command'):
+            if receivedtext_lower.startswith ('command'):
                 servicetype = "command"
                 sonosinstruction = receivedtext[8:]
             
-            if receivedtext.startswith ('room'):
+            if receivedtext_lower.startswith ('room'):
                 servicetype = "room"
                 sonosroom_local = receivedtext[5:]
                 print ("Sonos room changed to " + sonosroom_local)
                 return True
 
             if servicetype == "":
-                print ("Service type not recognised. Tag text should begin spotify, tunein, command, room or apple/applemusic (experimental). (Case matters: lower case please)")
+                print ("Service type not recognised. Tag text should begin spotify, tunein, command, room or apple/applemusic.")
                 if usersettings.sendanonymoususagestatistics == "yes":
                     r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'invalid service type sent'})
                 return True
@@ -78,7 +79,7 @@ def touched(tag):
                 r = requests.post(appsettings.usagestatsurl, data = logdata)
 
     else:
-        print ("Tag Misread - Sorry")
+        print ("NFC reader could not read tag. This is usually because (a) the tag is encoded (b) you are trying to use a mifare classic card, which is not supported or (c) you have tried to add data to the card which is not in text format. Please check the data on the card using NFC Tools on Windows or Mac.")
         if usersettings.sendanonymoususagestatistics == "yes":
             r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'nfcreaderror'})
 
