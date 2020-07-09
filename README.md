@@ -37,9 +37,11 @@ This currently accesses three any of three different services depending on the c
 
 | Service name     | Behaviour       |
 | ---------------- | --------------- |
-| spotify | Plays a spotify album, track or playlist URI |
-| tunein | Plays a radio station identified by a tunein ID number |
-| command | Executes a command in the current room; can accept any command as defined in node-sonos-http-api |
+| spotify: | Plays a spotify album, track or playlist URI |
+| tunein: | Plays a radio station identified by a tunein ID number |
+| apple: | Plays a Apple music album, track of playlist URI |
+| room: | Changes the room in which the script plays|
+| command: | Executes a command in the current room; can accept any command as defined in node-sonos-http-api |
 
 Examples of what can be passed:
 
