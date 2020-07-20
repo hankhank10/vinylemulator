@@ -12,14 +12,25 @@ def touched(tag):
 
     if tag.ndef:
         for record in tag.ndef.records:
-            receivedtext = record.text
+            try:
+                receivedtext = record.text
+            except:
+                print("Error reading a *TEXT* tag from NFC.")
+                return True
+            
             receivedtext_lower = receivedtext.lower()
 
             print("")
             print("Read from NFC tag: "+ receivedtext)
 
             servicetype = ""
+            
+            #check if a full HTTP URL read from NFC
+            if receivedtext_lower.startswith ('http'):
+                servicetype = "completeurl"
+                sonosinstruction = receivedtext
 
+            #determine which music service read from NFC
             if receivedtext_lower.startswith ('spotify'):
                 servicetype = "spotify"
                 sonosinstruction = "spotify/now/" + receivedtext
@@ -27,6 +38,10 @@ def touched(tag):
             if receivedtext_lower.startswith ('tunein'):
                 servicetype = "tunein"
                 sonosinstruction = receivedtext
+            
+            if receivedtext_lower.startswith ('amazonmusic:'):
+                servicetype = "amazonmusic"
+                sonosinstruction = "amazonmusic/now/" + receivedtext[12:]
 
             if receivedtext_lower.startswith ('apple:'):
                 servicetype = "applemusic"
@@ -36,6 +51,7 @@ def touched(tag):
                 servicetype = "applemusic"
                 sonosinstruction = "applemusic/now/" + receivedtext[11:]
 
+            #check if a Sonos "command" or room change read from NFC
             if receivedtext_lower.startswith ('command'):
                 servicetype = "command"
                 sonosinstruction = receivedtext[8:]
@@ -46,8 +62,9 @@ def touched(tag):
                 print ("Sonos room changed to " + sonosroom_local)
                 return True
 
+            #if no service or command detected, exit
             if servicetype == "":
-                print ("Service type not recognised. Tag text should begin spotify, tunein, command, room or apple/applemusic.")
+                print ("Service type not recognised. NFC tag text should begin spotify, tunein, amazonmusic, apple/applemusic, command or room.")
                 if usersettings.sendanonymoususagestatistics == "yes":
                     r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'invalid service type sent'})
                 return True
@@ -55,8 +72,11 @@ def touched(tag):
             print ("Detected " + servicetype + " service request")
 
             #build the URL we want to request
-            urltoget = usersettings.sonoshttpaddress + "/" + sonosroom_local + "/" + sonosinstruction
-
+            if servicetype.lower() == 'completeurl':
+                urltoget = sonosinstruction
+            else:
+                urltoget = usersettings.sonoshttpaddress + "/" + sonosroom_local + "/" + sonosinstruction
+            
             #check Sonos API is responding
             try:
                 r = requests.get(usersettings.sonoshttpaddress)
