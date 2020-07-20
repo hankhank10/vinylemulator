@@ -129,7 +129,7 @@ print("")
 print("NFC READER")
 print("Connecting to NFC reader...")
 try:
-    reader = nfc.ContactlessFrontend('usb')
+    reader = nfc.ContactlessFrontend(usersettings.nfc_reader_path)
 except IOError as e:
     print ("... could not connect to reader")
     print ("")
