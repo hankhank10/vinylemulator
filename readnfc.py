@@ -127,23 +127,6 @@ print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("")
 print("SCRIPT")
 print ("You are running version " + appsettings.appversion + "...")
-try:
-    r = requests.get("https://version.hankapi.com/vinylemulator?version="+appsettings.appversion)
-    latest_version = r.text
-except:
-    latest_version = "unable to be identified at this time as the version server is not responding"
-
-if r.status_code != 200:
-    latest_version = "unable to be identified at this time as the version server returned an error"
-
-print ("... and latest version is " + latest_version)
-
-if latest_version == appsettings.appversion:
-    print ("Your script is up to date")
-else:
-    if r.status_code == 200:
-        print ("Your script is NOT up to date. Please download the latest with:")
-        print(">  git pull")
 
 print("")
 print("NFC READER")
