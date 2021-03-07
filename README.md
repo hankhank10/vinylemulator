@@ -4,9 +4,9 @@ Emulate the tactile experience of a vinyl collection through your Sonos system, 
 
 There is a step-by-step tutorial on how to set this up from first principles on a Raspberry Pi here: https://www.hackster.io/mark-hank/sonos-spotify-vinyl-emulator-ssve-3be63d
 
-(although see the "important note" below)
-
 Update: confirmed works with Sonos S2 released 8 June 2020
+
+Update: this code relies on NFCpy which is incompatible with some newer card readers. You may wish to use [Node Sonos NFC](https://github.com/ryanolf/node-sonos-nfc) rather than this library. This is a Node implementation of this idea - the NFC cards should be compatible between both implementations.
 
 Description
 ---------------------------
