@@ -67,13 +67,14 @@ Setup instructions
 I made a full tutorial, starting from absolute first principles, here:
 https://www.hackster.io/mark-hank/sonos-spotify-vinyl-emulator-ssve-3be63d
 
-Registering
+Setup instructions
 ---------------------------
-If you want to register for email updates on the project you can register your address by running:
 
-```
-python register-email.py
-```
+Since developing this code in early 2020 it's become apparent that a number of the newer ACR122U NFC readers (which is what I recommended for this project) are not compatible with NFCpy, which is the library that my Python code uses.
+
+Even worse, there seems to be no way to know whether the ACR122U reader you are going to get will work or not... which is annoying.
+
+Luckily ryanolf has created a new library which is compatible with the newer readers and is available here: https://github.com/ryanolf/node-sonos-nfc
 
 Anonymous stats
 ---------------------------
