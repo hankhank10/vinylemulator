@@ -54,6 +54,8 @@ Examples of what can be passed:
       spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im
 
       tunein/play/44491
+      
+      favourite/BBC_Radio_2
 
       command:playpause
       command:mute
