@@ -39,6 +39,10 @@ def touched(tag):
                 servicetype = "tunein"
                 sonosinstruction = receivedtext
             
+            if receivedtext_lower.startswith ('favorite'):
+                servicetype = "favorite"
+                sonosinstruction = receivedtext
+            
             if receivedtext_lower.startswith ('amazonmusic:'):
                 servicetype = "amazonmusic"
                 sonosinstruction = "amazonmusic/now/" + receivedtext[12:]
