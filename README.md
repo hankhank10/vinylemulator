@@ -57,6 +57,8 @@ Examples of what can be passed:
       
       favourite/BBC_Radio_2
 
+      bbcsounds:bbc_radio_two
+
       command:playpause
       command:mute
       command:next
