@@ -41,9 +41,12 @@ This currently accesses three any of three different services depending on the c
 | ---------------- | --------------- |
 | spotify: | Plays a spotify album, track or playlist URI |
 | tunein: | Plays a radio station identified by a tunein ID number |
-| apple: | Plays a Apple music album, track of playlist URI |
+| bbcsounds: | Plays a BBC radio station identified by stream name as detailed in node-sonos-http-api readme |
+| apple: | Plays a Apple Music album, track or playlist URI |
+| amazonmusic: | Plays a Amazon Music album, track or playlist URI |
 | room: | Changes the room in which the script plays|
 | command: | Executes a command in the current room; can accept any command as defined in node-sonos-http-api |
+| favorite: | Plays a Sonos favorite identified by its name |
 
 Examples of what can be passed:
 
@@ -54,6 +57,10 @@ Examples of what can be passed:
       spotify:user:spotify:playlist:32O0SSXDNWDrMievPkV0Im
 
       tunein/play/44491
+      
+      favourite/BBC_Radio_2
+
+      bbcsounds:bbc_radio_two
 
       command:playpause
       command:mute
