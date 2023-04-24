@@ -17,3 +17,6 @@ sendanonymoususagestatistics="yes"
 #then replace "usb" with "usb:072f:2200"
 #(or whatever lsusb outputted for your nfc reader)
 nfc_reader_path="usb"
+
+#beep on connect
+nfc_reader_beep_on_connect=True
