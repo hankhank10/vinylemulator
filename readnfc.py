@@ -183,5 +183,5 @@ if usersettings.sendanonymoususagestatistics == "yes":
     r = requests.post(appsettings.usagestatsurl, data = {'time': time.time(), 'value1': appsettings.appversion, 'value2': hex(uuid.getnode()), 'value3': 'appstart'})
 
 while True:
-    reader.connect(rdwr={'on-connect': touched, 'beep-on-connect': False})
+    reader.connect(rdwr={'on-connect': touched, 'beep-on-connect': usersettings.nfc_reader_beep_on_connect})
     time.sleep(0.1);
